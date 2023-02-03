@@ -1,0 +1,81 @@
+TRAIN_FILTER:
+  - data/train/soft/*close-gripper*
+  - data/train/soft/*lower*
+  - data/train/soft/*slide*
+VAL_FILTER:
+  - data/test/soft/*close-gripper*
+  - data/test/soft/*lower*
+  - data/test/soft/*slide*
+
+
+NETWORK_TYPE: smp
+NETWORK_IMAGE_SIZE_X: 480
+NETWORK_IMAGE_SIZE_Y:  384
+
+#NORM_FORCE_REGRESS: 20
+
+TRAIN_BG_SUB: False
+VAL_BG_SUB: False
+
+#P_NO_BG_REPLACE: 0.2
+#P_SOLID_COLOR: 0.2
+
+MAX_EPOCHS: 60
+
+LEARNING_RATE_INITIAL: 0.001
+LEARNING_RATE_SCHEDULER_STEP:
+  - 10
+LEARNING_RATE_SCHEDULER_GAMMA: 0.1
+BATCH_SIZE: 8
+
+FORCE_CLASSIFICATION: True
+DATALOADER_FORCE_METHOD: 2
+NUM_FORCE_CLASSES: 9
+FORCE_THRESHOLDS:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.4
+  - 0.8
+  - 1.6
+  - 3.2
+  - 6.4
+FORCE_CLASSIFICATION_NONZERO_WEIGHT: 1
+
+
+# Single frame config
+DATALOADER_IMAGE_METHOD: 0   # How the input image will be represented
+NETWORK_INPUT_CHANNELS: 3
+DATALOADER_TRAIN_SKIP_FRAMES: 1   # Set to 1 to train on every frame, set to 5 to take every 5th frame
+DATALOADER_TEST_SKIP_FRAMES: 80
+
+NUM_WORKERS: 12
+
+#CROP_IMAGES: True
+#CROP_MARGIN: 50
+
+TRAIN_ITERS_PER_EPOCH: 10000
+
+EXCLUDE_ACTIONS:
+  - empty_list
+
+AUGMENT_FLIP: True
+AUGMENT_BRIGHTNESS_CONTRAST: True
+AUGMENT_ROTATION: 10
+AUGMENT_TRANSLATION: 0.1
+AUGMENT_MIN_SCALE: 1.0
+AUGMENT_MAX_SCALE: 1.2
+VAL_SCALE: 1.1
+
+TRAIN_USE_CAMERAS:
+  - 0
+  - 1
+  - 2
+  - 3
+
+VAL_USE_CAMERAS:
+  - 0
+  - 1
+  - 2
+  - 3
